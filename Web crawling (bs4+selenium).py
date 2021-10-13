@@ -96,8 +96,7 @@ import time
 # In[5]:
 
 
-# 가상 크롬드라이버를 불러옴.
-# 윈도우 10의 경우 chromedriver.exe
+
 driver = webdriver.Chrome('driver/chromedriver')
 
 
