@@ -155,7 +155,6 @@ datatotal2 <- sort(sample(nrow(newdata2), nrow(newdata2)*train_ratio))
 train2 <- newdata2[datatotal2,]                   
 test2 <- newdata2[datatotal2,]
 
-#knn
 ctrl <- trainControl(method = "repeatedcv", repeats = 5)
 customGrid <- expand.grid(k=1:20)
 knn_fit2 <- train(Chance.of.Admit ~ .,
@@ -172,7 +171,6 @@ dev.off()
 knn_pred2 <- predict(knn_fit2, newdata=test2)
 confusionMatrix(knn_pred2, test2$Chance.of.Admit)
 
-## Logit Boost
 ctrl <- trainControl(method = "repeatedcv", repeats = 5)
 logit_boost_fit2 <- train(Chance.of.Admit ~ .,
                           data = train2,
