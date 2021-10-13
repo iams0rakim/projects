@@ -1,0 +1,113 @@
+library(caret)
+rawdata1 <- read.csv("bank.csv", header = TRUE)
+str(rawdata1) #대략적인 데이터 확인
+unique(rawdata1$age)
+unique(rawdata1$job)
+unique(rawdata1$marital)
+unique(rawdata1$education)
+unique(rawdata1$default)
+unique(rawdata1$housing)
+unique(rawdata1$loan)
+unique(rawdata1$contact)
+unique(rawdata1$month)
+unique(rawdata1$day_of_week)
+unique(rawdata1$duration)
+unique(rawdata1$campaign)
+unique(rawdata1$previous)
+unique(rawdata1$poutcome)
+unique(rawdata1$emp.var.rate)
+unique(rawdata1$cons.price.idx)
+unique(rawdata1$cons.conf.idx)
+unique(rawdata1$euribor3m)
+unique(rawdata1$nr.employed)
+unique(rawdata1$target)
+
+#unknown->NA 변환
+rawdata1[rawdata1=="unknown"]<-NA
+rawdata1
+sum(is.na(rawdata1)) #결측치 개수 확인 
+rawdata1 <- na.omit(rawdata1) #결측치 행 제거
+str(rawdata1)
+
+#히스토그램
+par(mfrow=c(3,3), mar=c(5.1, 4.1, 4.1, 2.1))
+hist(rawdata1$age, main="Age Histogram", xlab="Age", col = "orange")
+hist(rawdata1$duration, main="Duration Histogram", xlab="Duration", col = "yellow")
+hist(rawdata1$campaign, main="Campaign Histogram", xlab="Campaign", col = "green")
+hist(rawdata1$previous, main="Previous Histogram", xlab="Previous", col = "blue")
+hist(rawdata1$emp.var.rate, main="Emp.var.rate Histogram", xlab="Emp.var.rate", col = "navy")
+hist(rawdata1$cons.price.idx, main="Cons.price.idx Histogram", xlab="Cons.price.idx", col = "purple")
+hist(rawdata1$cons.conf.idx, main="Cons.conf.idx Histogram", xlab="Cons.conf.idx", col = "salmon")
+hist(rawdata1$euribor3m, main="Euribo 3m Histogram", xlab="Euribo 3m", col = "gray")
+hist(rawdata1$nr.employed, main="Nr.employed", xlab="Nr.employed", col = "black")
+
+#표준화
+rawdata1$age <- scale(rawdata1$age)
+rawdata1$duration <- scale(rawdata1$duration)
+rawdata1$campaign <- scale(rawdata1$campaign)
+rawdata1$previous <- scale(rawdata1$previous)
+rawdata1$emp.var.rate <- scale(rawdata1$emp.var.rate)
+rawdata1$cons.price.idx <- scale(rawdata1$cons.price.idx)
+rawdata1$cons.conf.idx <- scale(rawdata1$cons.conf.idx)
+rawdata1$euribor3m <- scale(rawdata1$euribor3m)
+rawdata1$nr.employed <- scale(rawdata1$nr.employed)
+
+par(mfrow=c(3,3), mar=c(5.1, 4.1, 4.1, 2.1))
+hist(rawdata1$age, main="Age Histogram", xlab="Age", col = "orange")
+hist(rawdata1$duration, main="Duration Histogram", xlab="Duration", col = "yellow")
+hist(rawdata1$campaign, main="Campaign Histogram", xlab="Campaign", col = "green")
+hist(rawdata1$previous, main="Previous Histogram", xlab="Previous", col = "blue")
+hist(rawdata1$emp.var.rate, main="Emp.var.rate Histogram", xlab="Emp.var.rate", col = "navy")
+hist(rawdata1$cons.price.idx, main="Cons.price.idx Histogram", xlab="Cons.price.idx", col = "purple")
+hist(rawdata1$cons.conf.idx, main="Cons.conf.idx Histogram", xlab="Cons.conf.idx", col = "salmon")
+hist(rawdata1$euribor3m, main="Euribo 3m Histogram", xlab="Euribo 3m", col = "gray")
+hist(rawdata1$nr.employed, main="Nr.employed", xlab="Nr.employed", col = "black")
+
+par(mfrow=c(3,3), mar=c(5.1, 4.1, 4.1, 2.1))
+barplot(prop.table(table(rawdata1$job)), main="job")
+barplot(prop.table(table(rawdata1$marital)), main="martial")
+barplot(prop.table(table(rawdata1$education)), main="education")
+barplot(prop.table(table(rawdata1$default)), main="default")
+barplot(prop.table(table(rawdata1$housing)), main="housing")
+barplot(prop.table(table(rawdata1$loan)), main="loan")
+barplot(prop.table(table(rawdata1$contact)), main="contact")
+barplot(prop.table(table(rawdata1$month)), main="month")
+barplot(prop.table(table(rawdata1$day_of_week)), main="day_of_week")
+
+table(rawdata1$job)
+prop.table(table(rawdata1$job)
+           
+barplot(prop.table(table(rawdata1$default)), main="default")
+table(rawdata1$default)
+
+par(mfrow=c(3,3), mar=c(0.1,0.1,0.1,0.1))
+pie(prop.table(table(rawdata1$job)), main="job")
+pie(prop.table(table(rawdata1$marital)), main="martial")
+pie(prop.table(table(rawdata1$education)), main="education")
+pie(prop.table(table(rawdata1$default)), main="default")
+pie(prop.table(table(rawdata1$housing)), main="housing")
+pie(prop.table(table(rawdata1$loan)), main="loan")
+pie(prop.table(table(rawdata1$contact)), main="contact")
+pie(prop.table(table(rawdata1$month)), main="month")
+pie(prop.table(table(rawdata1$day_of_week)), main="day of week")
+
+par(mfrow=c(3,3), mar=c(0.1,0.1,0.1,0.1))
+pie(prop.table(table(rawdata1$job)), main="job")
+pie(prop.table(table(rawdata1$marital)), main="martial")
+pie(prop.table(table(rawdata1$education)), main="education")
+pie(prop.table(table(rawdata1$default)), main="default")
+pie(prop.table(table(rawdata1$housing)), main="housing")
+pie(prop.table(table(rawdata1$loan)), main="loan")
+pie(prop.table(table(rawdata1$contact)), main="contact")
+pie(prop.table(table(rawdata1$month)), main="month")
+pie(prop.table(table(rawdata1$day_of_week)), main="day of week")
+
+#차원 축소를 통한 시각화
+num_feature <- c("age", "duration", "campaign", "previous", "emp.var.rate", "cons.price.idx", "cons.conf.idx", "euribor3m", "nr.employed")
+tar <- rawdata1[,"target"]
+num_data <- rawdata1[,num_feature]
+pca_num <- prcomp(num_data)
+
+plot(pca_num, type="l", main="Principle Component Analysis")
+
+summary(pca_num)
