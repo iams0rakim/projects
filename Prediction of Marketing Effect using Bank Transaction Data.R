@@ -1,6 +1,6 @@
 library(caret)
 rawdata1 <- read.csv("bank.csv", header = TRUE)
-str(rawdata1) #대략적인 데이터 확인
+str(rawdata1) 
 unique(rawdata1$age)
 unique(rawdata1$job)
 unique(rawdata1$marital)
@@ -22,14 +22,12 @@ unique(rawdata1$euribor3m)
 unique(rawdata1$nr.employed)
 unique(rawdata1$target)
 
-#unknown->NA 변환
 rawdata1[rawdata1=="unknown"]<-NA
 rawdata1
-sum(is.na(rawdata1)) #결측치 개수 확인 
-rawdata1 <- na.omit(rawdata1) #결측치 행 제거
+sum(is.na(rawdata1))
+rawdata1 <- na.omit(rawdata1) 
 str(rawdata1)
 
-#히스토그램
 par(mfrow=c(3,3), mar=c(5.1, 4.1, 4.1, 2.1))
 hist(rawdata1$age, main="Age Histogram", xlab="Age", col = "orange")
 hist(rawdata1$duration, main="Duration Histogram", xlab="Duration", col = "yellow")
@@ -41,7 +39,6 @@ hist(rawdata1$cons.conf.idx, main="Cons.conf.idx Histogram", xlab="Cons.conf.idx
 hist(rawdata1$euribor3m, main="Euribo 3m Histogram", xlab="Euribo 3m", col = "gray")
 hist(rawdata1$nr.employed, main="Nr.employed", xlab="Nr.employed", col = "black")
 
-#표준화
 rawdata1$age <- scale(rawdata1$age)
 rawdata1$duration <- scale(rawdata1$duration)
 rawdata1$campaign <- scale(rawdata1$campaign)
@@ -102,7 +99,6 @@ pie(prop.table(table(rawdata1$contact)), main="contact")
 pie(prop.table(table(rawdata1$month)), main="month")
 pie(prop.table(table(rawdata1$day_of_week)), main="day of week")
 
-#차원 축소를 통한 시각화
 num_feature <- c("age", "duration", "campaign", "previous", "emp.var.rate", "cons.price.idx", "cons.conf.idx", "euribor3m", "nr.employed")
 tar <- rawdata1[,"target"]
 num_data <- rawdata1[,num_feature]
